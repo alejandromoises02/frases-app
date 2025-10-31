@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -19,4 +19,4 @@ export const GlobalStyle = createGlobalStyle`
     font-family: system-ui, sans-serif;
     background: linear-gradient(135deg, #ffffff, #f1f3f5);
   }
-`
+`;
