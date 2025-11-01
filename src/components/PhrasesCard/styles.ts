@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { CARD_DIMM } from '../../constants';
 
 export const Card = styled.div`
-  width: 200px;
-  height: 150px;
+  width: ${CARD_DIMM.WIDTH}px;
+  height: ${CARD_DIMM.HEIGHT}px;
   padding: 1rem;
   border-radius: 12px;
   background-color: #ffffff;

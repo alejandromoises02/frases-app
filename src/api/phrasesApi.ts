@@ -1,4 +1,3 @@
-const BASE_URL = 'http://localhost:4000/phrases';
 import { API_BASE_URL } from './constants';
 
 export const getPhrases = async () => {

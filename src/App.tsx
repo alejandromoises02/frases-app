@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { PhrasesProvider } from './context/PhrasesContext';
+import { PhrasesGrid } from './components/PhrasesGrid';
 
 export const AppContainer = styled.div`
   display: flex;
@@ -11,7 +12,9 @@ export const AppContainer = styled.div`
 function App() {
   return (
     <PhrasesProvider>
-      <AppContainer>{<h1>Phrases App</h1>}</AppContainer>
+      <AppContainer>
+        <PhrasesGrid />
+      </AppContainer>
     </PhrasesProvider>
   );
 }
