@@ -1,4 +1,5 @@
 import {
+  useEffect,
   createElement,
   useState,
   type ReactNode,
@@ -6,7 +7,11 @@ import {
   useCallback,
   createContext
 } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  getPhrases,
+  addPhrase as apiAddPhrase,
+  deletePhrase as apiDeletePhrase
+} from '../api/phrasesApi';
 import type { TPhrase } from './types';
 import type { TPhrasesContext } from './types';
 
@@ -22,12 +27,33 @@ export const PhrasesProvider = ({
   const [phrases, setPhrases] = useState<TPhrase[]>([]);
   const [filterText, setFilterText] = useState('');
 
-  const addPhrase = useCallback((text: string) => {
-    setPhrases((prev) => [...prev, { id: uuidv4(), text }]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getPhrases();
+        setPhrases(data);
+      } catch (err) {
+        console.error('Error loading phrases:', err);
+      }
+    })();
   }, []);
 
-  const removePhrase = useCallback((id: string) => {
-    setPhrases((prev) => prev.filter((f) => f.id !== id));
+  const addPhrase = useCallback(async (text: string) => {
+    try {
+      const newPhrase = await apiAddPhrase(text);
+      setPhrases((prev) => [...prev, newPhrase]);
+    } catch (err) {
+      console.error('Error adding phrase:', err);
+    }
+  }, []);
+
+  const removePhrase = useCallback(async (id: string) => {
+    try {
+      await apiDeletePhrase(id);
+      setPhrases((prev) => prev.filter((p) => p.id !== id));
+    } catch (err) {
+      console.error('Error removing phrase:', err);
+    }
   }, []);
 
   const filteredPhrases = useMemo(
