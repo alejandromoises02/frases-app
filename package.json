@@ -6,7 +6,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --quiet --fix",
-      "jest --bail --findRelatedTests"
+      "npm run test:ci"
     ],
     "*.{ts,tsx}": [
       "prettier --write --ignore-unknown"
@@ -17,8 +17,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest --watchAll",
-    "test:ci": "jest --passWithNoTests",
+    "test": "jest",
+    "test:ci": "jest --passWithNoTests --bail",
     "prepare": "husky && husky install"
   },
   "dependencies": {
