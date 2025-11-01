@@ -8,8 +8,12 @@ export const Grid = styled.div`
     minmax(${CARD_DIMM.WIDTH + 50}px, 1fr)
   );
   gap: 1rem;
+  width: 100%;
+  max-width: 2500px;
+  margin: 0 auto;
   padding: 2rem;
   justify-items: center;
+  box-sizing: border-box;
 `;
 
 export const EmptyState = styled.div`
