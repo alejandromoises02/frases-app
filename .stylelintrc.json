@@ -1,5 +1,4 @@
 {
-  "ignoreFiles": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "ignoreFiles": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", ".storybook/**"],
   "rules": {}
 }
-  
