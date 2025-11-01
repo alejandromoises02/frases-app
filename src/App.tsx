@@ -11,7 +11,6 @@ export const AppContainer = styled.div`
 function App() {
   return (
     <PhrasesProvider>
-      
       <AppContainer>{<h1>Phrases App</h1>}</AppContainer>
     </PhrasesProvider>
   );
