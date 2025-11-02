@@ -5,6 +5,20 @@ Permite agregar, eliminar y filtrar frases de manera interactiva, utilizando bue
 
 ---
 
+## 🌐 Demo / Deploy
+
+La aplicación está desplegada en línea:
+
+- **Servidor (API)**: [https://phrases-app.onrender.com](https://phrases-app.onrender.com)  
+  Aquí se almacenan y gestionan todas las frases de la matriz.
+
+- **Interfaz de Usuario (UI)**: [https://phrases-app-client.onrender.com](https://phrases-app-client.onrender.com)  
+  Interactúa con la matriz de frases, agrega, busca y elimina frases directamente desde la web.
+
+> ⚠️ Nota: Actualmente, todos los clientes comparten la misma lista de frases.
+
+---
+
 ## 🚀 Tecnologías y herramientas
 
 - ⚛️ **React 19** con **TypeScript**  
@@ -32,15 +46,15 @@ Permite agregar, eliminar y filtrar frases de manera interactiva, utilizando bue
 - 🔎 Mensaje cuando el filtro no coincide con ninguna frase: `"No se encontraron frases que contengan: {texto del filtro}"`  
 - 🖼️ Grid de frases con **scroll interno** cuando la cantidad de frases excede la altura disponible, manteniendo siempre **formulario arriba** y **filtro abajo** visibles.  
 
-#### Matriz de Frases
+### Matriz de Frases
 
 ![Matriz de frases](assets/matrix_phrases.png)
 
-#### Matriz de Frases con busqueda
+### Matriz de Frases con busqueda
 
 ![Matriz de frases con busqueda](assets/matrix_search.png)
 
-#### Matriz Modal Borrar
+### Matriz Modal Borrar
 
 ![Matriz modal borrar](assets/matrix_delete_modal.png)
 
