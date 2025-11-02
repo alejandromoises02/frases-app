@@ -1,42 +1,89 @@
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
+import mongoose from 'mongoose';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const DB_FILE = './phrases.json';
+const MONGODB_URI = process.env.MONGODB_URI; 
 
-// Init
-if (!fs.existsSync(DB_FILE)) {
-  fs.writeFileSync(DB_FILE, JSON.stringify([]));
+if (!MONGODB_URI) {
+    console.error("Error: MONGODB_URI no está definida. ¡Asegúrate de configurarla en Render!");
+    process.exit(1);
 }
 
-// get phrases list
-app.get('/phrases', (req, res) => {
-  const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-  res.json(data);
+// try connet MongoDB
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Conexión a MongoDB Atlas exitosa.'))
+  .catch(err => {
+    console.error('Error al conectar a MongoDB:', err);
+    process.exit(1);
+  });
+
+
+// struct MongoDB
+const phraseSchema = new mongoose.Schema({
+  text: {
+    type: String,
+    required: true,
+  },
+}, { timestamps: true }); 
+
+const Phrase = mongoose.model('Phrase', phraseSchema);
+
+const mapPhraseToClient = (phrase) => {
+  const obj = phrase.toJSON ? phrase.toJSON() : phrase; 
+  if (obj._id) {
+      obj.id = obj._id;
+      delete obj._id;
+  }
+  delete obj.__v;
+  return obj;
+};
+
+// get phrases
+app.get('/phrases', async (req, res) => {
+  try {
+    const phrases = await Phrase.find({});
+    const formattedPhrases = phrases.map(mapPhraseToClient);
+    res.json(formattedPhrases);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener frases de la base de datos.' });
+  };
 });
 
 // add phrase
-app.post('/phrases', (req, res) => {
+app.post('/phrases', async (req, res) => {
   const { text } = req.body;
   if (!text) return res.status(400).json({ error: 'No text provided' });
-  const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-  const newPhrase = { id: crypto.randomUUID(), text };
-  data.push(newPhrase);
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
-  res.json(newPhrase);
+  
+  try {
+    const newPhrase = new Phrase({ text });
+    await newPhrase.save();
+    res.status(201).json(mapPhraseToClient(newPhrase)); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al guardar la frase en la base de datos.' });
+  }
 });
 
 // delete phrase
-app.delete('/phrases/:id', (req, res) => {
+app.delete('/phrases/:id', async (req, res) => {
   const { id } = req.params;
-  let data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-  data = data.filter(p => p.id !== id);
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
-  res.status(204).send();
+  
+  try {
+    const result = await Phrase.findByIdAndDelete(id);
+    
+    if (!result) {
+        return res.status(404).json({ error: 'Frase no encontrada.' });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al eliminar la frase.' });
+  }
 });
 
 const PORT = process.env.PORT || 4000;
