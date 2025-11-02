@@ -16,7 +16,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: system-ui, sans-serif;
-    background: linear-gradient(135deg, #ffffff, #f1f3f5);
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(135deg, #ffffff, #4D4D4D);
+  }
+
+  h1, button, input, textarea {
+    font-family: 'Orbitron', sans-serif;
   }
 `;
