@@ -34,6 +34,7 @@ La aplicación está desplegada en línea:
 - 🐶 **Husky** + **lint-staged** para ejecutar lint, prettier y tests en cada commit  
 - 🌐 **Servidor local Express** (`server.js`) para simulación de backend
 - 🤝 **Concurrently** para levantar servidor y frontend en paralelo
+- 📱 **Mobile Friendly** adaptado para vista mobile
 
 ---
 
@@ -57,6 +58,18 @@ La aplicación está desplegada en línea:
 ### Matriz Modal Borrar
 
 ![Matriz modal borrar](assets/matrix_delete_modal.png)
+
+### Matriz Mobile
+
+![Matriz Mobile](assets/mobile_matrix_phrases.png)
+
+### Modal Borrar Mobile
+
+![Modal Borrar Mobile](assets/delete_phrase_mobile.png)
+
+### Ver Todo el texto Mobile
+
+![Ver Todo el texto Mobile](assets/show_text_mobile.png)
 
 ---
 
