@@ -14,14 +14,16 @@ export default meta;
 
 type Story = StoryObj<typeof PhrasesGrid>;
 
-const mockProvider = (phrases: TPhrase[]) => (
+const mockProvider = (phrases: TPhrase[], filterText = '') => (
   <PhrasesContext.Provider
     value={{
       phrases,
-      filteredPhrases: phrases,
+      filteredPhrases: phrases.filter((f) =>
+        f.text.toLowerCase().includes(filterText.toLowerCase())
+      ),
       addPhrase: () => {},
       removePhrase: () => {},
-      filterText: '',
+      filterText,
       setFilterText: () => {}
     }}
   >
@@ -29,9 +31,9 @@ const mockProvider = (phrases: TPhrase[]) => (
   </PhrasesContext.Provider>
 );
 
-export const Empty: Story = {
+export const NoPhrases: Story = {
   render: () => mockProvider([]),
-  name: 'Sin frases'
+  name: 'No Phrases'
 };
 
 export const WithPhrases: Story = {
@@ -46,5 +48,17 @@ export const WithPhrases: Story = {
       { id: '7', text: 'Hazlo simple, pero significativo' },
       { id: '8', text: 'La práctica hace al maestro' }
     ]),
-  name: 'Con frases'
+  name: 'With Phrases'
+};
+
+export const FilterNoMatch: Story = {
+  render: () =>
+    mockProvider(
+      [
+        { id: '1', text: 'Life is beautiful' },
+        { id: '2', text: 'Clean code is happiness' }
+      ],
+      'nonexistent'
+    ),
+  name: 'Filter No Match'
 };
