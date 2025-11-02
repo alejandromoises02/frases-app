@@ -8,6 +8,7 @@ Permite agregar, eliminar y filtrar frases de manera interactiva, utilizando bue
 ## 🚀 Tecnologías y herramientas
 
 - ⚛️ **React 19** con **TypeScript**  
+- 🔧 **Node.js** version 20.19+ or 22.12+
 - ⚡ **Vite** como bundler y servidor de desarrollo con HMR  
 - 🎨 **Styled Components** para estilos dinámicos y modulares  
 - 🌐 **Context API** para manejo de estado global (`PhrasesContext`)  
