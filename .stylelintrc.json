@@ -1,4 +1,4 @@
 {
-  "ignoreFiles": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", ".storybook/**"],
+  "ignoreFiles": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", ".storybook/**", "node_modules/**", "README.md"],
   "rules": {}
 }

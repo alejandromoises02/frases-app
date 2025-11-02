@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# 📝 Frases App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Frases App** es una aplicación web desarrollada con **React + TypeScript + Vite**, diseñada para gestionar y filtrar frases.  
+Permite agregar, eliminar y filtrar frases de manera interactiva, utilizando buenas prácticas de desarrollo moderno: context, hooks personalizados, manejo de errores con `try/catch`, testing y más.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologías y herramientas
 
-## React Compiler
+- ⚛️ **React 19** con **TypeScript**  
+- ⚡ **Vite** como bundler y servidor de desarrollo con HMR  
+- 🎨 **Styled Components** para estilos dinámicos y modulares  
+- 🌐 **Context API** para manejo de estado global (`PhrasesContext`)  
+- 🪝 **Custom Hooks** (`usePhrases`, `useEmptyState`) para lógica reutilizable  
+- ⏱️ **Async / Await + Try / Catch** para manejo de operaciones asincrónicas  
+- 📚 **Storybook** para documentación y visualización de componentes  
+- 🧪 **Jest + React Testing Library** para tests unitarios e integración  
+- 🔧 **ESLint + Prettier** para linting y formateo automático  
+- 🐶 **Husky** + **lint-staged** para ejecutar lint, prettier y tests en cada commit  
+- 🌐 **Servidor local Express** (`server.js`) para simulación de backend
+- 🤝 **Concurrently** para levantar servidor y frontend en paralelo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades principales
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ➕ Agregar nuevas frases mediante un formulario.  
+- 🔍 Filtrar frases existentes en tiempo real.  
+- ❌ Eliminar frases individualmente.  
+- 💭 Mensaje cuando no hay frases: `"No hay frases disponibles aún"`  
+- 🔎 Mensaje cuando el filtro no coincide con ninguna frase: `"No se encontraron frases que contengan: {texto del filtro}"`  
+- 🖼️ Grid de frases con **scroll interno** cuando la cantidad de frases excede la altura disponible, manteniendo siempre **formulario arriba** y **filtro abajo** visibles.  
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🏗️ Estructura y buenas prácticas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `components/` → Componentes React modulares (`PhrasesGrid`, `PhrasesCard`, `PhraseForm`, `PhraseFilter`)  
+- `context/` → Context API y hooks (`PhrasesContext`, `usePhrases`)  
+- `hooks/` → Custom hooks (`useEmptyState`)  
+- `styles/` → Styled Components 
+- `server.js` → Servidor Express para simular endpoints de frases  
+
+## Instalación y ejecución
+
+Clonar el repositorio y entrar en la carpeta del proyecto:
+
+```bash
+git clone https://github.com/alejandromoises02/frases-app.git
+cd frases-app
+npm install
+npm run start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+npm run start permite la ejecución de
+```npm run dev``` (ui)
+y ```npm run server``` (servidor local)
+los cuales tambien se pueden ejecutar por separado
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tests
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+```npm run test```
+
+## Storybook
+
+```npm run storybook```
