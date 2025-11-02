@@ -14,7 +14,8 @@ describe('PhraseFilter', () => {
           addPhrase: jest.fn(),
           removePhrase: jest.fn(),
           filterText,
-          setFilterText: setFilterTextMock
+          setFilterText: setFilterTextMock,
+          loading: false
         }}
       >
         <PhraseFilter />
