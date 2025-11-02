@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { PhrasesGrid } from '../../components/PhrasesGrid';
 import { PhraseForm } from '../PhraseForm';
+import { PhraseFilter } from '../PhraseFilter';
 
 export const Container = styled.div`
   display: flex;
@@ -13,5 +14,6 @@ export const PhrasesAppContainer = () => (
   <Container>
     <PhraseForm />
     <PhrasesGrid />
+    <PhraseFilter />
   </Container>
 );
