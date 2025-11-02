@@ -79,10 +79,10 @@ describe('PhrasesGrid', () => {
     });
 
     render(<PhrasesGrid />);
-
-    const deleteButton = screen.getByRole('button');
+    const deleteButton = screen.getByTestId('remove-button');
     await userEvent.click(deleteButton);
-
+    const confirmButton = screen.getByTestId('confirm-button');
+    await userEvent.click(confirmButton);
     expect(removePhraseMock).toHaveBeenCalledWith('1');
   });
 });

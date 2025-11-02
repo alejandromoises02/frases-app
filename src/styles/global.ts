@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     background: linear-gradient(135deg, #ffffff, #4D4D4D);
   }
 
-  h1, button, input, textarea {
+  h1, h3, button, input, textarea {
     font-family: 'Orbitron', sans-serif;
   }
 `;
