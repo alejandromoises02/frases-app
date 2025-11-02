@@ -5,12 +5,20 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   padding: 20px;
+
+  @media (max-width: 480px) {
+    padding: 5px;
+  }
 `;
 
 export const GridWrapper = styled.div`
   flex: 1;
   overflow-y: auto;
   margin: 10px 0;
+
+  @media (max-width: 480px) {
+    margin: 0;
+  }
 `;
 
 export const Title = styled.h1`

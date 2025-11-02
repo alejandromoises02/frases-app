@@ -21,6 +21,10 @@ export const Card = styled.div`
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.8);
   }
+
+  @media (max-width: 480px) {
+    padding: 0px;
+  }
 `;
 
 export const RemoveButton = styled.button`

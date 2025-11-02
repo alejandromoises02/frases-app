@@ -14,6 +14,10 @@ export const Grid = styled.div`
   padding: 2rem;
   justify-items: center;
   box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    padding: 0px;
+  }
 `;
 
 export const EmptyState = styled.div`

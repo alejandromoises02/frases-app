@@ -2,28 +2,74 @@ import { useState, useCallback } from 'react';
 import type { TPhrasesCard } from './type';
 import { Card, RemoveButton, Text } from './styles';
 import { ConfirmModal } from '../ConfirmModal';
+import { useIsMobile } from '../../hooks/useMobileModal';
 
 export const PhrasesCard = ({ id, text, onRemove }: TPhrasesCard) => {
+  const isMobile = useIsMobile();
   const [showModal, setShowModal] = useState(false);
+  const [modalInfo, setModalInfo] = useState({
+    title: '',
+    confirmText: '',
+    cancelText: '',
+    type: 'confirm' as 'confirm' | 'info'
+  });
 
   const handleConfirm = useCallback(() => {
-    onRemove(id);
+    if (modalInfo.type === 'confirm') onRemove(id);
     setShowModal(false);
+    setModalInfo({
+      title: '',
+      confirmText: '',
+      cancelText: '',
+      type: 'confirm'
+    });
   }, [id, onRemove]);
 
   const handleCancel = useCallback(() => {
     setShowModal(false);
+    setModalInfo({
+      title: '',
+      confirmText: '',
+      cancelText: '',
+      type: 'confirm'
+    });
   }, []);
+
+  const handleTouchMobile = useCallback(() => {
+    if (isMobile) {
+      setShowModal(true);
+      setModalInfo({
+        title: 'Frase',
+        confirmText: 'Cerrar',
+        cancelText: '',
+        type: 'info'
+      });
+    }
+  }, [isMobile]);
+
+  const handleDeleteText = useCallback(() => {
+    setModalInfo({
+      title: '¿Estás seguro de borrar esta frase?',
+      confirmText: 'Borrar',
+      cancelText: 'Cancelar',
+      type: 'confirm'
+    });
+    setShowModal(true);
+  }, [text]);
 
   return (
     <>
       <Card>
-        <Text title={text} data-testid="phrase-text">
+        <Text
+          title={text}
+          data-testid="phrase-text"
+          onClick={handleTouchMobile}
+        >
           {text}
         </Text>
         <RemoveButton
           data-testid="remove-button"
-          onClick={() => setShowModal(true)}
+          onClick={handleDeleteText}
         >
           Borrar
         </RemoveButton>
@@ -31,10 +77,10 @@ export const PhrasesCard = ({ id, text, onRemove }: TPhrasesCard) => {
 
       {showModal && (
         <ConfirmModal
-          title="¿Estás seguro de borrar esta frase?"
+          title={modalInfo.title}
           message={text}
-          confirmText="Borrar"
-          cancelText="Cancelar"
+          confirmText={modalInfo.confirmText}
+          cancelText={modalInfo.cancelText || undefined}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
         />

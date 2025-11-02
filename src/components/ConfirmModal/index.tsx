@@ -13,7 +13,7 @@ export const ConfirmModal = ({
   message,
   confirmText,
   onConfirm,
-  cancelText = 'Cancelar',
+  cancelText,
   onCancel
 }: TConfirmModal) => (
   <Overlay>
@@ -24,7 +24,7 @@ export const ConfirmModal = ({
         <Button onClick={onConfirm} data-testid="confirm-button">
           {confirmText}
         </Button>
-        {onCancel && (
+        {onCancel && cancelText && (
           <Button onClick={onCancel} data-testid="cancel-button">
             {cancelText}
           </Button>
