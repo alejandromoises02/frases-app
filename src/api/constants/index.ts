@@ -1,1 +1,3 @@
-export const API_BASE_URL = 'http://localhost:4000';
+/// <reference types="vite/client" />
+
+export const API_BASE_URL = import.meta.env.VITE_PHRASES_URL_API;
