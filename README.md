@@ -5,6 +5,24 @@ Permite agregar, eliminar y filtrar frases de manera interactiva, utilizando bue
 
 ---
 
+## Instalación y ejecución
+
+Clonar el repositorio y entrar en la carpeta del proyecto:
+
+```bash
+git clone https://github.com/alejandromoises02/frases-app.git
+cd frases-app
+npm install
+npm run start
+```
+
+npm run start permite la ejecución de
+```npm run dev``` (ui)
+y ```npm run server``` (servidor local)
+los cuales tambien se pueden ejecutar por separado
+
+---
+
 ## 🌐 Demo / Deploy
 
 La aplicación está desplegada en línea:
@@ -16,6 +34,29 @@ La aplicación está desplegada en línea:
   Interactúa con la matriz de frases, agrega, busca y elimina frases directamente desde la web.
 
 > ⚠️ Nota: Actualmente, todos los clientes comparten la misma lista de frases.
+
+---
+
+## Tests
+
+```npm run test```
+
+## Storybook
+
+```npm run storybook```
+
+![Storybook](assets/storybook.png)
+
+---
+
+## 🗄️ Base de datos integrada con MongoDB
+
+El servidor Express está conectado a una base de datos MongoDB alojada en MongoDB Atlas, utilizando Mongoose para la gestión de los modelos y las operaciones CRUD.
+Esto permite almacenar las frases de manera persistente y escalable, asegurando que las frases agregadas, eliminadas o consultadas se reflejen directamente en la base de datos.
+
+### Base de Datos
+
+![Ejemplo MongoDB](assets/mongodb_example.png)
 
 ---
 
@@ -34,6 +75,7 @@ La aplicación está desplegada en línea:
 - 🐶 **Husky** + **lint-staged** para ejecutar lint, prettier y tests en cada commit  
 - 🌐 **Servidor local Express** (`server.js`) para simulación de backend
 - 🤝 **Concurrently** para levantar servidor y frontend en paralelo
+- 📱 **Mobile Friendly** adaptado para vista mobile
 
 ---
 
@@ -58,6 +100,12 @@ La aplicación está desplegada en línea:
 
 ![Matriz modal borrar](assets/matrix_delete_modal.png)
 
+### Matriz Mobile Ejemplos
+
+<img src="assets/mobile_matrix_phrases.png" alt="Ejemplo MongoDB" width="200"/>
+<img src="assets/delete_phrase_mobile.png" alt="Ejemplo MongoDB" width="200"/>
+<img src="assets/show_text_mobile.png" alt="Ejemplo MongoDB" width="200"/>
+
 ---
 
 ## 🏗️ Estructura y buenas prácticas
@@ -67,29 +115,3 @@ La aplicación está desplegada en línea:
 - `hooks/` → Custom hooks (`useEmptyState`)  
 - `styles/` → Styled Components
 - `server.js` → Servidor Express para simular endpoints de frases  
-
-## Instalación y ejecución
-
-Clonar el repositorio y entrar en la carpeta del proyecto:
-
-```bash
-git clone https://github.com/alejandromoises02/frases-app.git
-cd frases-app
-npm install
-npm run start
-```
-
-npm run start permite la ejecución de
-```npm run dev``` (ui)
-y ```npm run server``` (servidor local)
-los cuales tambien se pueden ejecutar por separado
-
-## Tests
-
-```npm run test```
-
-## Storybook
-
-```npm run storybook```
-
-![Storybook](assets/storybook.png)

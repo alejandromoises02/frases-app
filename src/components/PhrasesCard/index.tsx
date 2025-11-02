@@ -23,7 +23,7 @@ export const PhrasesCard = ({ id, text, onRemove }: TPhrasesCard) => {
       cancelText: '',
       type: 'confirm'
     });
-  }, [id, onRemove]);
+  }, [id, onRemove, modalInfo.type]);
 
   const handleCancel = useCallback(() => {
     setShowModal(false);
@@ -55,7 +55,7 @@ export const PhrasesCard = ({ id, text, onRemove }: TPhrasesCard) => {
       type: 'confirm'
     });
     setShowModal(true);
-  }, [text]);
+  }, []);
 
   return (
     <>

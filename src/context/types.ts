@@ -10,4 +10,5 @@ export type TPhrasesContext = {
   removePhrase: (id: string) => void;
   filterText: string;
   setFilterText: (text: string) => void;
+  loading: boolean;
 };

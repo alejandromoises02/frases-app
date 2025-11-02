@@ -1,11 +1,13 @@
 import { usePhrases } from '../../context/usePhrases';
 import { PhrasesCard } from '../PhrasesCard';
 import { useEmptyState } from '../../hooks/useEmptyState';
-import { Grid, EmptyState, Emoji, EmptyText } from './styles';
+import { Grid, EmptyState, Emoji, EmptyText, Loader } from './styles';
 
 export const PhrasesGrid = () => {
-  const { filteredPhrases, removePhrase } = usePhrases();
+  const { filteredPhrases, removePhrase, loading } = usePhrases();
   const { noPhrasesMessage, emoji } = useEmptyState();
+
+  if (loading) return <Loader>Cargando frases...</Loader>;
 
   if (noPhrasesMessage) {
     return (

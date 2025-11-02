@@ -26,6 +26,7 @@ export const PhrasesProvider = ({
 }) => {
   const [phrases, setPhrases] = useState<TPhrase[]>([]);
   const [filterText, setFilterText] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -34,6 +35,8 @@ export const PhrasesProvider = ({
         setPhrases(data);
       } catch (err) {
         console.error('Error loading phrases:', err);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
@@ -70,7 +73,8 @@ export const PhrasesProvider = ({
     addPhrase,
     removePhrase,
     filterText,
-    setFilterText
+    setFilterText,
+    loading
   };
 
   return createElement(PhrasesContext.Provider, { value }, children);

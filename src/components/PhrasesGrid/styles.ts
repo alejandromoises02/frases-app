@@ -54,3 +54,12 @@ export const Emoji = styled.span`
     transform: scale(1.2);
   }
 `;
+
+export const Loader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-size: 1.1rem;
+  color: #555;
+`;
