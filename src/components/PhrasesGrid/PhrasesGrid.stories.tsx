@@ -24,7 +24,8 @@ const mockProvider = (phrases: TPhrase[], filterText = '') => (
       addPhrase: () => {},
       removePhrase: () => {},
       filterText,
-      setFilterText: () => {}
+      setFilterText: () => {},
+      loading: false
     }}
   >
     <PhrasesGrid />

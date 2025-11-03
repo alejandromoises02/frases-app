@@ -31,7 +31,8 @@ const MockProvider = ({
     },
     removePhrase: () => {},
     filterText: '',
-    setFilterText: () => {}
+    setFilterText: () => {},
+    loading: false
   };
 
   return (
