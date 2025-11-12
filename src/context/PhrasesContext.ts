@@ -5,7 +5,8 @@ import {
   type ReactNode,
   useMemo,
   useCallback,
-  createContext
+  createContext,
+  useDeferredValue
 } from 'react';
 import {
   getPhrases,
@@ -59,12 +60,16 @@ export const PhrasesProvider = ({
     }
   }, []);
 
+  const deferredFilterText = useDeferredValue(filterText);
+  const regex = useMemo(() => {
+    const term = deferredFilterText.trim().replace(/\s+/g, ' ');
+    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(escaped, 'i');
+  }, [deferredFilterText]);
+
   const filteredPhrases = useMemo(
-    () =>
-      phrases.filter((f) =>
-        f.text.toLowerCase().includes(filterText.toLowerCase())
-      ),
-    [phrases, filterText]
+    () => phrases.filter((f) => regex.test(f.text)),
+    [phrases, regex]
   );
 
   const value = {
