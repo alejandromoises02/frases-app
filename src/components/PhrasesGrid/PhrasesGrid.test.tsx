@@ -15,12 +15,28 @@ describe('PhrasesGrid', () => {
     jest.clearAllMocks();
   });
 
-  it('show empty state when no phrases', () => {
+  it('shows the loading state when phrases are being loaded', () => {
     mockUsePhrases.mockReturnValue({
-      phrases: [],
       filteredPhrases: [],
       removePhrase: jest.fn(),
-      filterText: ''
+      loading: true
+    });
+    mockUseEmptyState.mockReturnValue({
+      noPhrasesMessage: '',
+      emoji: ''
+    });
+
+    render(<PhrasesGrid />);
+    expect(
+      screen.getByText('Cargando frases...')
+    ).toBeInTheDocument();
+  });
+
+  it('show empty state when no phrases and not loading', () => {
+    mockUsePhrases.mockReturnValue({
+      filteredPhrases: [],
+      removePhrase: jest.fn(),
+      loading: false
     });
 
     mockUseEmptyState.mockReturnValue({
@@ -36,20 +52,16 @@ describe('PhrasesGrid', () => {
     expect(screen.getByText('💭')).toBeInTheDocument();
   });
 
-  it('show filtered phrases when exist', () => {
+  it('show filtered phrases when exist and not loading', () => {
     const removePhraseMock = jest.fn();
 
     mockUsePhrases.mockReturnValue({
-      phrases: [
-        { id: '1', text: 'Primera frase' },
-        { id: '2', text: 'Segunda frase' }
-      ],
       filteredPhrases: [
         { id: '1', text: 'Primera frase' },
         { id: '2', text: 'Segunda frase' }
       ],
       removePhrase: removePhraseMock,
-      filterText: ''
+      loading: false
     });
 
     mockUseEmptyState.mockReturnValue({
@@ -67,10 +79,9 @@ describe('PhrasesGrid', () => {
     const removePhraseMock = jest.fn();
 
     mockUsePhrases.mockReturnValue({
-      phrases: [{ id: '1', text: 'Frase a borrar' }],
       filteredPhrases: [{ id: '1', text: 'Frase a borrar' }],
       removePhrase: removePhraseMock,
-      filterText: ''
+      loading: false
     });
 
     mockUseEmptyState.mockReturnValue({

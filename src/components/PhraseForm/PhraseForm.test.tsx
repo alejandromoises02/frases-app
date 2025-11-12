@@ -31,7 +31,7 @@ describe('PhraseForm', () => {
     expect(mockAddPhrase).not.toHaveBeenCalled();
   });
 
-  it('call addPhrae correctly with valid text', () => {
+  it('call addPhrae correctly with valid text and clear input', () => {
     render(<PhraseForm />);
     const input = screen.getByPlaceholderText(
       'Escribe una nueva frase...'
@@ -39,6 +39,23 @@ describe('PhraseForm', () => {
     fireEvent.change(input, { target: { value: 'Nueva frase' } });
     fireEvent.click(screen.getByText('Agregar'));
     expect(mockAddPhrase).toHaveBeenCalledWith('Nueva frase');
+    expect(input).toHaveValue('');
+  });
+
+  it('show an error if addPhrase fails', () => {
+    mockAddPhrase.mockImplementation(() => {
+      throw new Error('API Error');
+    });
+    render(<PhraseForm />);
+    const input = screen.getByPlaceholderText(
+      'Escribe una nueva frase...'
+    );
+    fireEvent.change(input, { target: { value: 'Error phrase' } });
+    fireEvent.click(screen.getByText('Agregar'));
+    expect(mockAddPhrase).toHaveBeenCalledWith('Error phrase');
+    expect(
+      screen.getByText('Hubo un error al agregar la frase.')
+    ).toBeInTheDocument();
   });
 
   it('clean the error when start to write', () => {
@@ -56,5 +73,27 @@ describe('PhraseForm', () => {
     expect(
       screen.queryByText('La frase no puede estar vacía.')
     ).not.toBeInTheDocument();
+  });
+
+  it('submits on Enter key press', () => {
+    render(<PhraseForm />);
+    const input = screen.getByPlaceholderText(
+      'Escribe una nueva frase...'
+    );
+    fireEvent.change(input, { target: { value: 'Enter phrase' } });
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+    expect(mockAddPhrase).toHaveBeenCalledWith('Enter phrase');
+  });
+
+  it('does not submit on non-Enter key press', () => {
+    render(<PhraseForm />);
+    const input = screen.getByPlaceholderText(
+      'Escribe una nueva frase...'
+    );
+    fireEvent.change(input, {
+      target: { value: 'Other key phrase' }
+    });
+    fireEvent.keyDown(input, { key: 'A', code: 'KeyA' });
+    expect(mockAddPhrase).not.toHaveBeenCalled();
   });
 });
