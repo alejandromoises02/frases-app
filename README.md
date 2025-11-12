@@ -124,4 +124,13 @@ Esto permite almacenar las frases de manera persistente y escalable, asegurando 
 - `context/` → Context API y hooks (`PhrasesContext`, `usePhrases`)  
 - `hooks/` → Custom hooks (`useEmptyState`)  
 - `styles/` → Styled Components
-- `server.js` → Servidor Express para simular endpoints de frases  
+- `server.js` → Servidor Express para simular endpoints de frases
+
+## 🏗️ Decisiones Técnicas
+
+- `Filter`: En el componente PhraseFilter (buscador) se optimizó el rendimiento y la escalabilidad mediante startTransition, un hook personalizado useDebounce, useDeferredValue, escapeRegExp y un mínimo de tres caracteres para disparar la búsqueda.
+- `a11y`: Se mejoró la accesibilidad agregando el componente LiveRegion con aria-live="polite" para notificaciones de agregado o eliminación de frases mediante lectores de pantalla. Se implementaron los hooks personalizados useFocusAfterDelete para mantener el foco dentro de la lista tras eliminar una frase, y useFocusTrap para restringir el foco dentro del modal de confirmación.
+- `Error boundary`: Se incluyó el componente ErrorBoundary para capturar errores en tiempo de ejecución dentro del grid y las cards, evitando que un fallo rompa toda la aplicación, y proporcionando opciones de reintento o recarga para el usuario.
+- `Coverage`: se publica el coverage en un deploy local [Ver reporte local](https://alejandromoises02.github.io/frases-app/) y con integracion en sonarqube [Ver reporte SonarQube](https://sonarcloud.io/summary/overall?id=alejandromoises02_frases-app&branch=main).
+- `Frases Largas`: Actualmente el componente PhrasesCard cuenta con estilos para mantener un tamaño fijo (sin importar el largo del texto) y -webkit-line-clamp 5, word-break:break-word; para mantener la estructura al superar las 5 lineas(todo el espacio disponible del contenedor), se agrego recientemente overflow-wrap:anywhere se puede observar en el ejemplo el caso para textos que sobre pasan el tamaño.
+![Ejemplo card texto largo](assets/matrix_long_text.png)
