@@ -16,7 +16,7 @@ describe('PhrasesContext', () => {
     const phrases = [{ id: '1', text: 'Hello world' }];
     mockGet.mockResolvedValueOnce(phrases);
 
-    let contextValue: TPhrasesContext;
+    let contextValue: TPhrasesContext | undefined;
     await act(async () => {
       render(
         <PhrasesProvider>
@@ -31,9 +31,9 @@ describe('PhrasesContext', () => {
     });
 
     await waitFor(() => {
-      expect(contextValue.loading).toBe(false);
-      expect(contextValue.phrases).toEqual(phrases);
-      expect(contextValue.filteredPhrases).toEqual(phrases);
+      expect(contextValue!.loading).toBe(false);
+      expect(contextValue!.phrases).toEqual(phrases);
+      expect(contextValue!.filteredPhrases).toEqual(phrases);
     });
   });
 
@@ -42,7 +42,7 @@ describe('PhrasesContext', () => {
     mockAdd.mockResolvedValueOnce(newPhrase);
     mockGet.mockResolvedValueOnce([]);
 
-    let contextValue: TPhrasesContext;
+    let contextValue: TPhrasesContext | undefined;
     await act(async () => {
       render(
         <PhrasesProvider>
@@ -57,11 +57,11 @@ describe('PhrasesContext', () => {
     });
 
     await act(async () => {
-      await contextValue.addPhrase('New text');
+      await contextValue!.addPhrase('New text');
     });
 
-    expect(contextValue.phrases).toContainEqual(newPhrase);
-    expect(contextValue.filteredPhrases).toContainEqual(newPhrase);
+    expect(contextValue!.phrases).toContainEqual(newPhrase);
+    expect(contextValue!.filteredPhrases).toContainEqual(newPhrase);
   });
 
   it('removePhrase should remove a phrase', async () => {
@@ -69,7 +69,7 @@ describe('PhrasesContext', () => {
     mockGet.mockResolvedValueOnce(initialPhrases);
     mockDelete.mockResolvedValueOnce(true);
 
-    let contextValue: TPhrasesContext;
+    let contextValue: TPhrasesContext | undefined;
     await act(async () => {
       render(
         <PhrasesProvider>
@@ -84,11 +84,11 @@ describe('PhrasesContext', () => {
     });
 
     await act(async () => {
-      await contextValue.removePhrase('1');
+      await contextValue!.removePhrase('1');
     });
 
-    expect(contextValue.phrases).toEqual([]);
-    expect(contextValue.filteredPhrases).toEqual([]);
+    expect(contextValue!.phrases).toEqual([]);
+    expect(contextValue!.filteredPhrases).toEqual([]);
   });
 
   it('should filter phrases using regex escaped', async () => {
@@ -98,7 +98,7 @@ describe('PhrasesContext', () => {
     ];
     mockGet.mockResolvedValueOnce(phrases);
 
-    let contextValue: TPhrasesContext;
+    let contextValue: TPhrasesContext | undefined;
     await act(async () => {
       render(
         <PhrasesProvider>
@@ -113,28 +113,28 @@ describe('PhrasesContext', () => {
     });
 
     await act(async () => {
-      contextValue.setFilterText('Hello');
+      contextValue!.setFilterText('Hello');
     });
 
     await waitFor(() => {
-      expect(contextValue.filteredPhrases).toEqual([
+      expect(contextValue!.filteredPhrases).toEqual([
         { id: '1', text: 'Hello world' }
       ]);
     });
 
     await act(async () => {
-      contextValue.setFilterText('.*+?^${}()|[]\\');
+      contextValue!.setFilterText('.*+?^${}()|[]\\');
     });
 
     await waitFor(() => {
-      expect(contextValue.filteredPhrases).toEqual([]);
+      expect(contextValue!.filteredPhrases).toEqual([]);
     });
   });
 
   it('should handle API errors without crashing', async () => {
     mockGet.mockRejectedValueOnce(new Error('fail'));
 
-    let contextValue: TPhrasesContext;
+    let contextValue: TPhrasesContext | undefined;
     await act(async () => {
       render(
         <PhrasesProvider>
@@ -149,9 +149,9 @@ describe('PhrasesContext', () => {
     });
 
     await waitFor(() => {
-      expect(contextValue.loading).toBe(false);
-      expect(contextValue.phrases).toEqual([]);
-      expect(contextValue.filteredPhrases).toEqual([]);
+      expect(contextValue!.loading).toBe(false);
+      expect(contextValue!.phrases).toEqual([]);
+      expect(contextValue!.filteredPhrases).toEqual([]);
     });
   });
 });
