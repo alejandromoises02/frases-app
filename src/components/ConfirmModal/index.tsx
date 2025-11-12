@@ -6,7 +6,7 @@ import {
   Message,
   Buttons,
   Button
-} from './style';
+} from './styles';
 
 export const ConfirmModal = ({
   title,
