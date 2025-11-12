@@ -27,8 +27,11 @@ jobs:
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectKey: 'alejandromoises02_frases-app'
-          organization: 'alejandromoises02'
-          token: ${{ secrets.SONAR_TOKEN }}
-          coverageReportPaths: 'coverage/lcov-report/lcov.info'
+          args: >
+            -Dsonar.projectKey=alejandromoises02_frases-app
+            -Dsonar.organization=alejandromoises02
+            -Dsonar.sources=src
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report/lcov.info
