@@ -37,3 +37,4 @@ jobs:
             -Dsonar.tests=src
             -Dsonar.test.inclusions=**/*.test.ts,**/*.test.tsx
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.exclusions=**/*.stories.tsx,**/styles/**,**/style/**,**/constants/**
