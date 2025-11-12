@@ -20,6 +20,6 @@ module.exports = {
     '!src/styles/**',
     '!src/constants/**',
   ],
-  coverageReporters: ['text', 'html'],
+  coverageReporters: ['text', 'html', 'lcov'],
   coverageDirectory: '<rootDir>/coverage',
 };

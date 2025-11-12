@@ -5,8 +5,7 @@
   "type": "module",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --quiet --fix",
-      "npm run test:ci"
+      "eslint --quiet --fix"
     ],
     "*.{ts,tsx}": [
       "prettier --write --ignore-unknown"
