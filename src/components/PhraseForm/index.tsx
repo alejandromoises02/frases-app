@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { usePhrases } from '../../context/usePhrases';
 import { FormWrapper, Input, Button, ErrorText } from './styles';
+import { LiveRegion } from '../LiveRegion';
 
 export const PhraseForm = () => {
   const { addPhrase } = usePhrases();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
+  const [notification, setNotification] = useState('');
 
   const handleAdd = () => {
     const trimmed = text.trim();
@@ -18,6 +20,7 @@ export const PhraseForm = () => {
       addPhrase(trimmed);
       setText('');
       setError('');
+      setNotification(`Frase agregada: ${trimmed}`); //just for a11y and readers purpose
     } catch {
       setError('Hubo un error al agregar la frase.');
     }
@@ -29,7 +32,7 @@ export const PhraseForm = () => {
     if (e.key === 'Enter') handleAdd();
   };
 
-  const handleTetxtChange = (
+  const handleTextChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setText(e.target.value);
@@ -42,11 +45,13 @@ export const PhraseForm = () => {
         type="text"
         placeholder="Escribe una nueva frase..."
         value={text}
-        onChange={handleTetxtChange}
+        onChange={handleTextChange}
         onKeyDown={handleKeyPress}
       />
       <Button onClick={handleAdd}>Agregar</Button>
       {error && <ErrorText>{error}</ErrorText>}
+
+      <LiveRegion message={notification} />
     </FormWrapper>
   );
 };
