@@ -53,6 +53,7 @@ export const Text = styled.span`
   color: #333;
   line-height: 1.4;
   word-break: break-word;
+  overflow-wrap: anywhere;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
