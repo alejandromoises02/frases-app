@@ -37,9 +37,19 @@ La aplicación está desplegada en línea:
 
 ---
 
-## Tests
+## 🧪 Tests y Coverage
 
 ```npm run test```
+
+Badges SonarQuebe
+
+ [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=alejandromoises02_frases-app)
+ [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=alejandromoises02_frases-app)](https://sonarcloud.io/summary/new_code?id=alejandromoises02_frases-app)
+ [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=alejandromoises02_frases-app&metric=coverage)](https://sonarcloud.io/summary/new_code?id=alejandromoises02_frases-app)
+
+- El comando muestra cobertura en consola.
+- Se agregó el workflow coverage: .github/workflows/coverage.yml que permite generar un reporte de cobertura HTML desplegado automáticamente en GitHub Pages(>80%): [Ver reporte](https://alejandromoises02.github.io/frases-app/)
+- Se agregó el sonar: .github/workflows/coverage.yml y se configuro sonarqube para quality gates y coverage(>80%): [SonarQube](https://sonarcloud.io/summary/overall?id=alejandromoises02_frases-app&branch=main)
 
 ## Storybook
 
