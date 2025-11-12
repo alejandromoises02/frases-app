@@ -34,4 +34,6 @@ jobs:
             -Dsonar.projectKey=alejandromoises02_frases-app
             -Dsonar.organization=alejandromoises02
             -Dsonar.sources=src
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report/lcov.info
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=**/*.test.ts,**/*.test.tsx
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
