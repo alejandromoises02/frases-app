@@ -4,7 +4,8 @@ export const useFocusTrap = (
   modalRef: React.RefObject<HTMLElement | null>
 ) => {
   useEffect(() => {
-    if (!modalRef.current) return;
+    const modal = modalRef.current;
+    if (!modal) return;
 
     const focusableSelectors = [
       'a[href]',
@@ -16,10 +17,9 @@ export const useFocusTrap = (
       '[tabindex]:not([tabindex="-1"])'
     ];
 
-    const focusableElements =
-      modalRef.current.querySelectorAll<HTMLElement>(
-        focusableSelectors.join(',')
-      );
+    const focusableElements = modal.querySelectorAll<HTMLElement>(
+      focusableSelectors.join(',')
+    );
     const firstElement = focusableElements[0];
     const lastElement =
       focusableElements[focusableElements.length - 1];
@@ -40,11 +40,11 @@ export const useFocusTrap = (
       }
     };
 
-    modalRef.current.addEventListener('keydown', handleKeyDown);
+    modal.addEventListener('keydown', handleKeyDown);
     firstElement?.focus();
 
     return () => {
-      modalRef.current?.removeEventListener('keydown', handleKeyDown);
+      modal.removeEventListener('keydown', handleKeyDown);
     };
   }, [modalRef]);
 };
